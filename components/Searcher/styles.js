@@ -4,9 +4,10 @@ import { colors } from "../../styles/colors";
 export const styles = StyleSheet.create({
   searcherContainer: {
     backgroundColor: colors.tertiary,
-    // flexDirection: "row",
+    flexDirection: "row",
     width: "90%",
-    height: 120,
+    // height: 120,
+    paddingVertical: 15,
     marginVertical: 20,
     alignItems: "center",
     shadowColor: "#000",

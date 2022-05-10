@@ -29,5 +29,26 @@ export const styles = StyleSheet.create({
   },
   text: {
     fontSize: 18,
+    textAlign: "center",
+  },
+  list: {
+    width: "100%",
+    paddingHorizontal: 20,
+    flex: 1,
+    justifyContent: "center",
+  },
+  backButtonContainer: {
+    paddingTop: 20,
+    width: "100%",
+    paddingHorizontal: 20,
+    justifyContent: "flex-start",
+  },
+  backButton: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  backButtonText: {
+    paddingLeft: 10,
+    fontSize: 18,
   },
 });

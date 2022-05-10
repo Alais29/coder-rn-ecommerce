@@ -11,5 +11,9 @@ export const styles = StyleSheet.create({
   },
   text: {
     fontSize: 16,
+    color: "#fff",
+    fontSize: 22,
+    fontFamily: "Nunito",
+    fontWeight: "bold",
   },
 });
