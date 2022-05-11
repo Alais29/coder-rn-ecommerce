@@ -46,11 +46,17 @@ const Categories = ({ handleCategory }) => {
           </TouchableOpacity>
         </Searcher>
         <View>
-          <List
-            data={filteredItems}
-            itemType="category"
-            onPress={handleSelectCategory}
-          />
+          {filteredItems.length !== 0 ? (
+            <List
+              data={filteredItems}
+              itemType="category"
+              onPress={handleSelectCategory}
+            />
+          ) : (
+            <Text style={styles.text}>
+              No hay categorías que coincidan con tu búsqueda
+            </Text>
+          )}
         </View>
       </View>
     </>

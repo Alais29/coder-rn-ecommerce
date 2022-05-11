@@ -8,7 +8,7 @@ const CategoryItem = ({ category }) => {
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={`${category.image}/150?random=${getRandomNumber(10)}`}
+        source={{ uri: `${category.image}/150?random=${getRandomNumber(10)}` }}
         resizeMode="cover"
         style={styles.image}
         imageStyle={{ borderRadius: 10 }}

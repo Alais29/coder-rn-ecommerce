@@ -13,6 +13,8 @@ export default function App() {
     NunitoBold: require("./assets/fonts/Nunito/Nunito-Bold.ttf"),
     Montserrat: require("./assets/fonts/Montserrat/Montserrat-Regular.ttf"),
     MontserratBold: require("./assets/fonts/Montserrat/Montserrat-Bold.ttf"),
+    Rubik: require("./assets/fonts/Rubik/Rubik-Regular.ttf"),
+    RubikBold: require("./assets/fonts/Rubik/Rubik-Bold.ttf"),
   });
 
   if (!loaded) return <AppLoading />;
