@@ -4,9 +4,11 @@ import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 import Categories from "./screens/Categories/Categories";
 import Products from "./screens/Products/Products";
+import ProductDetail from "./screens/ProductDetail";
 
 export default function App() {
   const [categorySelected, setCategorySelected] = useState(null);
+  const [productSelected, setProductSelected] = useState(null);
 
   const [loaded] = useFonts({
     Nunito: require("./assets/fonts/Nunito/Nunito-Regular.ttf"),
@@ -23,12 +25,22 @@ export default function App() {
     setCategorySelected(category);
   };
 
+  const handleProduct = (product) => {
+    setProductSelected(product);
+  };
+
   return (
     <View style={styles.container}>
-      {categorySelected ? (
-        <Products category={categorySelected} handleCategory={handleCategory} />
-      ) : (
+      {!categorySelected ? (
         <Categories handleCategory={handleCategory} />
+      ) : !productSelected ? (
+        <Products
+          category={categorySelected}
+          handleCategory={handleCategory}
+          handleProduct={handleProduct}
+        />
+      ) : (
+        <ProductDetail item={productSelected} handleProduct={handleProduct} />
       )}
     </View>
   );

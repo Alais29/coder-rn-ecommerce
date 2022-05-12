@@ -1,9 +1,14 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import { colors } from "../../../styles/colors";
+
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 
 export const styles = StyleSheet.create({
   container: {
+    maxWidth: windowWidth * 0.4,
     width: 150,
+    maxHeight: windowWidth * 0.4,
     height: 150,
     backgroundColor: colors.secondary,
     margin: 15,

@@ -37,18 +37,8 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
   },
-  backButtonContainer: {
-    paddingTop: 20,
+  keyboardAvoid: {
+    flex: 1,
     width: "100%",
-    paddingHorizontal: 20,
-    justifyContent: "flex-start",
-  },
-  backButton: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  backButtonText: {
-    paddingLeft: 10,
-    fontSize: 18,
   },
 });
