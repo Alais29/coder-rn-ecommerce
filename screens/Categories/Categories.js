@@ -24,7 +24,10 @@ const Categories = ({ navigation }) => {
   };
 
   const handleSelectCategory = (category) => {
-    navigation.navigate("Products", { category, name: category.category });
+    navigation.navigate("Products", {
+      category: category.id,
+      name: category.category,
+    });
   };
 
   return (

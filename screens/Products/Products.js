@@ -9,10 +9,8 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import { Entypo } from "@expo/vector-icons";
-import Header from "../../components/Header/Header";
 import Searcher from "../../components/Searcher/Searcher";
 import List from "../../components/List/List";
-import BackButton from "../../components/BackButton";
 import { PRODUCTS } from "../../data/products";
 
 import { styles } from "./styles";
@@ -26,7 +24,7 @@ const Products = ({ route, navigation }) => {
 
   useEffect(() => {
     const initialProducts = PRODUCTS.filter(
-      (product) => product.categoria === category.id
+      (product) => product.categoria === category
     );
     setInitialProducts(initialProducts);
   }, []);
@@ -45,11 +43,7 @@ const Products = ({ route, navigation }) => {
   };
 
   const handleSelectProduct = (product) => {
-    navigation.navigate("Details", { item: product, name: product.nombre });
-  };
-
-  const handleBack = () => {
-    navigation.goBack();
+    navigation.navigate("Details", { item: product.id, name: product.nombre });
   };
 
   return (
@@ -60,7 +54,6 @@ const Products = ({ route, navigation }) => {
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
-          {/* <BackButton onPress={handleBack} /> */}
           <Searcher>
             <View style={styles.inputContainer}>
               <TextInput
