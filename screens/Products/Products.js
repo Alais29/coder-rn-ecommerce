@@ -17,14 +17,12 @@ import { PRODUCTS } from "../../data/products";
 
 import { styles } from "./styles";
 
-const Products = ({
-  category = { id: 1, category: "Ropa" },
-  handleCategory,
-  handleProduct,
-}) => {
+const Products = ({ route, navigation }) => {
   const [input, setInput] = useState("");
   const [filteredItems, setFilteredItems] = useState([]);
   const [initialProducts, setInitialProducts] = useState([]);
+
+  const { category } = route.params;
 
   useEffect(() => {
     const initialProducts = PRODUCTS.filter(
@@ -47,7 +45,11 @@ const Products = ({
   };
 
   const handleSelectProduct = (product) => {
-    handleProduct(product);
+    navigation.navigate("Details", { item: product, name: product.nombre });
+  };
+
+  const handleBack = () => {
+    navigation.goBack();
   };
 
   return (
@@ -56,10 +58,9 @@ const Products = ({
       style={styles.keyboardAvoid}
       keyboardVerticalOffset={10}
     >
-      <Header title={category.category} />
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
-          <BackButton onPress={() => handleCategory(null)} />
+          {/* <BackButton onPress={handleBack} /> */}
           <Searcher>
             <View style={styles.inputContainer}>
               <TextInput

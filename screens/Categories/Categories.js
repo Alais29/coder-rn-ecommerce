@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, TextInput, TouchableOpacity } from "react-native";
+import { View, TextInput, TouchableOpacity, Text } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { CATEGORIES } from "../../data/categories";
 import Header from "../../components/Header/Header";
@@ -8,7 +8,7 @@ import List from "../../components/List/List";
 
 import { styles } from "./styles";
 
-const Categories = ({ handleCategory }) => {
+const Categories = ({ navigation }) => {
   const [input, setInput] = useState("");
   const [filteredItems, setFilteredItems] = useState(CATEGORIES);
 
@@ -24,12 +24,11 @@ const Categories = ({ handleCategory }) => {
   };
 
   const handleSelectCategory = (category) => {
-    handleCategory(category);
+    navigation.navigate("Products", { category, name: category.category });
   };
 
   return (
     <>
-      <Header title="Categorias" />
       <View style={styles.container}>
         <Searcher>
           <View style={styles.inputContainer}>

@@ -5,18 +5,23 @@ import BackButton from "../../components/BackButton";
 
 import { styles } from "./styles";
 
-const ProductDetail = ({ item, handleProduct }) => {
+const ProductDetail = ({ route, navigation }) => {
   const [orientation, setOrientation] = useState("");
   const { height, width } = useWindowDimensions();
+
+  const { item } = route.params;
 
   useEffect(() => {
     setOrientation(height > width ? "portrait" : "landscape");
   }, [height, width]);
 
+  const handleBack = () => {
+    navigation.goBack();
+  };
+
   return (
     <>
-      <Header title={item.nombre} />
-      <BackButton onPress={() => handleProduct(null)} />
+      {/* <BackButton onPress={handleBack} /> */}
       <View
         style={
           orientation === "portrait"
