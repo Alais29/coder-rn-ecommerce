@@ -1,6 +1,6 @@
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
-import MainNavigator from "./Navigation/Shop";
+import MainNavigation from "./Navigation";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function App() {
@@ -17,7 +17,7 @@ export default function App() {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <MainNavigator />
+      <MainNavigation />
     </SafeAreaView>
   );
 }
