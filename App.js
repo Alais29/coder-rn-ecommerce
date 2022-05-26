@@ -1,7 +1,9 @@
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
-import MainNavigation from "./Navigation";
+import store from "./Store";
+import { Provider } from "react-redux";
 import { SafeAreaView } from "react-native-safe-area-context";
+import MainNavigation from "./Navigation";
 
 export default function App() {
   const [loaded] = useFonts({
@@ -17,7 +19,9 @@ export default function App() {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <MainNavigation />
+      <Provider store={store}>
+        <MainNavigation />
+      </Provider>
     </SafeAreaView>
   );
 }

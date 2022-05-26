@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { View, TextInput, TouchableOpacity, Text } from "react-native";
 import { Entypo } from "@expo/vector-icons";
-import { CATEGORIES } from "../../data/categories";
-import Header from "../../components/Header/Header";
+import { useDispatch, useSelector } from "react-redux";
+import { selectCategory } from "../../features/categories";
+import { setProductsByCategory } from "../../features/products";
 import Searcher from "../../components/Searcher/Searcher";
 import List from "../../components/List/List";
 
@@ -10,13 +11,19 @@ import { styles } from "./styles";
 
 const Categories = ({ navigation }) => {
   const [input, setInput] = useState("");
-  const [filteredItems, setFilteredItems] = useState(CATEGORIES);
+  const [filteredItems, setFilteredItems] = useState([]);
+
+  const { categories } = useSelector((state) => state.categories);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const newItems = CATEGORIES.filter((item) =>
-      item.category.toLowerCase().includes(input.toLowerCase())
-    );
-    setFilteredItems(newItems);
+    if (input === "") setFilteredItems(categories);
+    else {
+      const newItems = categories.filter((item) =>
+        item.category.toLowerCase().includes(input.toLowerCase())
+      );
+      setFilteredItems(newItems);
+    }
   }, [input]);
 
   const handleErase = () => {
@@ -24,10 +31,9 @@ const Categories = ({ navigation }) => {
   };
 
   const handleSelectCategory = (category) => {
-    navigation.navigate("Products", {
-      category: category.id,
-      name: category.category,
-    });
+    navigation.navigate("Products");
+    dispatch(selectCategory(category));
+    dispatch(setProductsByCategory(category.id));
   };
 
   return (
@@ -41,6 +47,7 @@ const Categories = ({ navigation }) => {
               keyboardType="default"
               style={styles.input}
               placeholder="Buscar categoría..."
+              placeholderTextColor="#fff"
             />
           </View>
           <TouchableOpacity onPress={handleErase}>

@@ -56,7 +56,7 @@ const TabNavigatorLogged = () => {
             return (
               <View style={styles.item}>
                 <Feather name="list" size={24} color="black" />
-                <Text>Cart</Text>
+                <Text>Orders</Text>
               </View>
             );
           },

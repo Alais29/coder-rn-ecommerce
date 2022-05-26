@@ -1,5 +1,6 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useSelector } from "react-redux";
 import Categories from "../../../screens/Categories/Categories";
 import Products from "../../../screens/Products/Products";
 import ProductDetail from "../../../screens/ProductDetail";
@@ -8,6 +9,9 @@ import { colors } from "../../../styles/colors";
 const Stack = createNativeStackNavigator();
 
 const ShopNavigator = () => {
+  const { categorySelected } = useSelector((state) => state.categories);
+  const { productSelected } = useSelector((state) => state.products);
+
   return (
     <Stack.Navigator
       initialRouteName="Categories"
@@ -27,12 +31,12 @@ const ShopNavigator = () => {
       <Stack.Screen
         name="Products"
         component={Products}
-        options={({ route }) => ({ title: route.params.name })}
+        options={() => ({ title: categorySelected.category })}
       />
       <Stack.Screen
         name="Details"
         component={ProductDetail}
-        options={({ route }) => ({ title: route.params.name })}
+        options={() => ({ title: productSelected.nombre })}
       />
     </Stack.Navigator>
   );
