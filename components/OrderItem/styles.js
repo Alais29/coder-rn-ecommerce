@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 import { colors } from "../../styles/colors";
 
 export const styles = StyleSheet.create({
-  order: {
+  container: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -11,9 +11,17 @@ export const styles = StyleSheet.create({
     borderColor: colors.info,
     borderWidth: 1,
     borderRadius: 6,
+    flex: 1,
+  },
+  order: {
+    flex: 1,
   },
   date: {
     fontSize: 18,
+  },
+  products: {
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   total: {
     fontSize: 18,

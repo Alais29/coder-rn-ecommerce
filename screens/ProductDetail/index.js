@@ -1,18 +1,25 @@
-import { View, Text, Image, useWindowDimensions } from "react-native";
+import { View, Text, Image, useWindowDimensions, Button } from "react-native";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { styles } from "./styles";
+import { addItem } from "../../features/cart";
 
-const ProductDetail = ({ navigation }) => {
+const ProductDetail = () => {
   const [orientation, setOrientation] = useState("");
   const { height, width } = useWindowDimensions();
 
   const { productSelected } = useSelector((state) => state.products);
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     setOrientation(height > width ? "portrait" : "landscape");
   }, [height, width]);
+
+  const handleAddToCart = () => {
+    dispatch(addItem(productSelected));
+  };
 
   return (
     <>
@@ -35,6 +42,7 @@ const ProductDetail = ({ navigation }) => {
             </Text>
             <Text style={styles.price}>${productSelected.precio}</Text>
           </View>
+          <Button onPress={handleAddToCart} title="Add to cart" />
         </View>
       )}
     </>

@@ -18,10 +18,10 @@ export default function App() {
   if (!loaded) return <AppLoading />;
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <Provider store={store}>
-        <MainNavigation />
-      </Provider>
-    </SafeAreaView>
+    // <SafeAreaView style={{ flex: 1 }}>
+    <Provider store={store}>
+      <MainNavigation />
+    </Provider>
+    // </SafeAreaView>
   );
 }

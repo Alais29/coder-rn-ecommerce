@@ -44,44 +44,44 @@ const Products = ({ navigation }) => {
 
   return (
     <>
-      <KeyboardAvoidingView
+      {/* <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.keyboardAvoid}
         keyboardVerticalOffset={10}
       >
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <View style={styles.container}>
-            <Searcher>
-              <View style={styles.inputContainer}>
-                <TextInput
-                  value={input}
-                  onChangeText={setInput}
-                  keyboardType="default"
-                  style={styles.input}
-                  placeholder="Buscar producto..."
-                  placeholderTextColor="#fff"
-                />
-              </View>
-              <TouchableOpacity onPress={handleErase}>
-                <Entypo name="erase" size={36} color="black" />
-              </TouchableOpacity>
-            </Searcher>
-            <View style={styles.list}>
-              {filteredItems.length !== 0 ? (
-                <List
-                  data={filteredItems}
-                  itemType="products"
-                  onPress={handleSelectProduct}
-                />
-              ) : (
-                <Text style={styles.text}>
-                  No hay artículos que coincidan con tu búsqueda
-                </Text>
-              )}
-            </View>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}> */}
+      <View style={styles.container}>
+        <Searcher>
+          <View style={styles.inputContainer}>
+            <TextInput
+              value={input}
+              onChangeText={setInput}
+              keyboardType="default"
+              style={styles.input}
+              placeholder="Buscar producto..."
+              placeholderTextColor="#fff"
+            />
           </View>
-        </TouchableWithoutFeedback>
-      </KeyboardAvoidingView>
+          <TouchableOpacity onPress={handleErase}>
+            <Entypo name="erase" size={36} color="black" />
+          </TouchableOpacity>
+        </Searcher>
+        <View style={styles.list}>
+          {filteredItems.length !== 0 ? (
+            <List
+              data={filteredItems}
+              itemType="products"
+              onPress={handleSelectProduct}
+            />
+          ) : (
+            <Text style={styles.text}>
+              No hay artículos que coincidan con tu búsqueda
+            </Text>
+          )}
+        </View>
+      </View>
+      {/* </TouchableWithoutFeedback> */}
+      {/* </KeyboardAvoidingView> */}
     </>
   );
 };
