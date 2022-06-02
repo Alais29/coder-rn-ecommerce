@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import Categories from "../../../screens/Categories/Categories";
 import Products from "../../../screens/Products/Products";
 import ProductDetail from "../../../screens/ProductDetail";
+import LogOutBtn from "../../../components/LogOutButton";
 import { colors } from "../../../styles/colors";
 
 const Stack = createNativeStackNavigator();
@@ -25,6 +26,7 @@ const ShopNavigator = () => {
           fontSize: 25,
         },
         headerTitleAlign: "center",
+        headerRight: () => <LogOutBtn />,
       }}
     >
       <Stack.Screen name="Categories" component={Categories} />

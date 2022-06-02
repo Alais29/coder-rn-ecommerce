@@ -2,6 +2,7 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Cart from "../../../screens/Cart";
 import { colors } from "../../../styles/colors";
+import LogOutBtn from "../../../components/LogOutButton";
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +20,7 @@ const CartStack = () => {
           fontSize: 25,
         },
         headerTitleAlign: "center",
+        headerRight: () => <LogOutBtn />,
       }}
     >
       <Stack.Screen

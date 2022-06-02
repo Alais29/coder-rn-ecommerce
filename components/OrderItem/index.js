@@ -23,7 +23,9 @@ const OrderItem = ({ item }) => {
             <Text key={`${item.id}-${product.id}-name`}>
               - {product.nombre}
             </Text>
-            <Text key={`${item.id}-${product.id}-price`}>{product.precio}</Text>
+            <Text key={`${item.id}-${product.id}-price`}>
+              ${product.precio}
+            </Text>
           </View>
         ))}
         <Text style={styles.total}>${total}</Text>

@@ -12,7 +12,7 @@ export const confirmPurchaseAsync = createAsyncThunk(
   "cart/confirmPurchase",
   async (items, asyncThunk) => {
     try {
-      const res = fetch(`${DB_URL}orders.json`, {
+      const res = await fetch(`${DB_URL}orders.json`, {
         method: "POST",
         body: JSON.stringify({
           date: new Date().toLocaleDateString(),

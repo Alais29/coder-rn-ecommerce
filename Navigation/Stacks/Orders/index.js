@@ -1,5 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
+import LogOutBtn from "../../../components/LogOutButton";
 import Orders from "../../../screens/Orders";
 import { colors } from "../../../styles/colors";
 
@@ -19,6 +20,7 @@ const OrderStack = () => {
           fontSize: 25,
         },
         headerTitleAlign: "center",
+        headerRight: () => <LogOutBtn />,
       }}
     >
       <Stack.Screen
