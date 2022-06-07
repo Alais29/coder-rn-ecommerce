@@ -4,6 +4,7 @@ import productsReducer from "../features/products";
 import cartReducer from "../features/cart";
 import ordersReducer from "../features/orders";
 import authReducer from "../features/auth";
+import locationReducer from "../features/locations";
 
 export default configureStore({
   reducer: {
@@ -12,5 +13,6 @@ export default configureStore({
     cart: cartReducer,
     orders: ordersReducer,
     auth: authReducer,
+    locations: locationReducer,
   },
 });

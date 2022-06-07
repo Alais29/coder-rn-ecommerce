@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 
 const MainNavigation = () => {
   const { user } = useSelector((state) => state.auth);
+  console.log;
   return (
     <NavigationContainer>
       {user.userID ? <TabNavigatorLogged /> : <AuthStack />}

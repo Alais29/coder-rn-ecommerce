@@ -3,41 +3,27 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import Input from "../../components/Input/input";
 import { signInAsync, signUpAsync } from "../../features/auth";
-import { schemaEmail, schemaPassword } from "../../utils/validateSchema";
+import loginValidationSchema from "../../utils/validationYup";
+import { Formik } from "formik";
+// import { schemaEmail, schemaPassword } from "../../utils/validateSchema";
 
 import { styles } from "./styles";
 
 const Login = () => {
   const [showSignup, setShowSignup] = useState(false);
-  const [email, setEmail] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
 
   const dispatch = useDispatch();
 
-  const handleSignup = () => {
-    const validateEmail = schemaEmail.validate({ email });
-    const validatePassword = schemaPassword.validate({ password });
-
-    if (validateEmail.error) setEmailError(validateEmail.error.message);
-    else setEmailError("");
-
-    if (validatePassword.error)
-      setPasswordError(validatePassword.error.message);
-    else setPasswordError("");
-
-    if (password === confirmPassword) {
-      dispatch(signUpAsync({ email, password }));
-      setConfirmPasswordError("");
-    } else setConfirmPasswordError("Passwords don't match");
-  };
-
-  const handleSignin = () => {
-    if (email !== "" && password !== "") {
-      dispatch(signInAsync({ email, password }));
+  const handleSubmit = (values) => {
+    if (showSignup) {
+      if (values.password === values.confirmPassword) {
+        dispatch(signUp({ email: values.email, password: values.password }));
+      } else {
+        setConfirmPasswordError("Passwords must be the same.");
+      }
+    } else {
+      dispatch(signInAsync({ email: values.email, password: values.password }));
     }
   };
 
@@ -46,42 +32,58 @@ const Login = () => {
       <View style={styles.content}>
         <View style={styles.formContainer}>
           <Text style={styles.title}>{showSignup ? "Sign Up" : "Sign In"}</Text>
-          <Input
-            label="Email"
-            onChange={setEmail}
-            value={email}
-            error={emailError}
-          />
-          <Input
-            label="Password"
-            password={true}
-            onChange={setPassword}
-            value={password}
-            error={passwordError}
-          />
-          {showSignup ? (
-            <Input
-              label="Confirm Password"
-              password={true}
-              onChange={setConfirmPassword}
-              value={confirmPassword}
-              error={confirmPasswordError}
-            />
-          ) : null}
-          <Button
-            title={showSignup ? "SignUp" : "SignIn"}
-            onPress={showSignup ? handleSignup : handleSignin}
-          />
-        </View>
-        <View style={styles.bottomMessage}>
-          <Text style={styles.bottomMessageText}>
-            {showSignup ? "Already" : "Don't"} have an account?
-          </Text>
-          <Button
-            title={showSignup ? "Sign In" : "Sign Up"}
-            style={{ width: "100%" }}
-            onPress={() => setShowSignup((prevValue) => !prevValue)}
-          />
+          <Formik
+            onSubmit={handleSubmit}
+            initialValues={{ email: "", password: "", confirmPassword: "" }}
+            validationSchema={loginValidationSchema}
+            validateOnChange={false}
+            validateOnBlur={false}
+          >
+            {({ handleChange, errors, handleSubmit, values, handleBlur }) => (
+              <>
+                <Input
+                  label="Email"
+                  password={false}
+                  onChange={handleChange("email")}
+                  value={values.email}
+                  error={errors.email}
+                  onBlur={handleBlur("email")}
+                />
+                <Input
+                  label="Password"
+                  password={true}
+                  onChange={handleChange("password")}
+                  value={values.password}
+                  error={errors.password}
+                  onBlur={handleBlur("password")}
+                />
+                {showSignup && (
+                  <Input
+                    label="Confirm password"
+                    password={true}
+                    onChange={handleChange("confirmPassword")}
+                    value={values.confirmPassword}
+                    onBlur={handleBlur("confirmPassword")}
+                    error={confirmPasswordError}
+                  />
+                )}
+                <Button
+                  title={showSignup ? "SignUp" : "SignIn"}
+                  onPress={handleSubmit}
+                />
+                <View style={styles.bottomMessage}>
+                  <Text style={styles.bottomMessageText}>
+                    {showSignup ? "Already" : "Don't"} have an account?
+                  </Text>
+                  <Button
+                    title={showSignup ? "Sign In" : "Sign Up"}
+                    style={{ width: "100%" }}
+                    onPress={() => setShowSignup((prevValue) => !prevValue)}
+                  />
+                </View>
+              </>
+            )}
+          </Formik>
         </View>
       </View>
     </View>

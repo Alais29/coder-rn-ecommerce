@@ -3,11 +3,12 @@ import { View, Text } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import CartStack from "../../Stacks/Cart";
 import ShopNavigator from "../../Stacks/Shop";
+import OrderStack from "../../Stacks/Orders";
 import { Entypo } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
-import OrderStack from "../../Stacks/Orders";
 
 import { styles } from "./styles";
+import LocationsStack from "../../Stacks/Locations";
 
 const BottomTabs = createBottomTabNavigator();
 
@@ -57,6 +58,20 @@ const TabNavigatorLogged = () => {
               <View style={styles.item}>
                 <Feather name="list" size={24} color="black" />
                 <Text>Orders</Text>
+              </View>
+            );
+          },
+        }}
+      />
+      <BottomTabs.Screen
+        name="LocationsTab"
+        component={LocationsStack}
+        options={{
+          tabBarIcon: ({ focused }) => {
+            return (
+              <View style={styles.item}>
+                <Entypo name="location" size={24} color="black" />
+                <Text>Direcciones</Text>
               </View>
             );
           },
