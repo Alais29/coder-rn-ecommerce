@@ -12,7 +12,7 @@ const LocationsScreen = () => {
         onSelect={() => {}}
         title={item.title}
         image={item.picture}
-        address="Avenida Siempreviva 1234"
+        address={item.address}
       />
     );
   };

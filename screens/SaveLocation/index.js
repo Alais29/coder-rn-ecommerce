@@ -7,9 +7,11 @@ import { addLocation } from "../../features/locations";
 
 import { styles } from "./styles";
 
-const SaveLocationScreen = () => {
+const SaveLocationScreen = ({ navigation, route }) => {
   const [title, setTitle] = React.useState("");
   const [picture, setPicture] = React.useState("");
+
+  const { params } = route;
 
   const dispatch = useDispatch();
 
@@ -22,7 +24,7 @@ const SaveLocationScreen = () => {
       quality: 1,
     });
 
-    console.log(result);
+    // console.log(result);
 
     if (!result.cancelled) {
       setPicture(result.uri);
@@ -32,7 +34,7 @@ const SaveLocationScreen = () => {
   const getPermission = async () => {
     const { status } = await ImagePicker.getCameraPermissionsAsync();
 
-    console.log(status);
+    // console.log(status);
     if (status !== "granted") {
       return false;
     }
@@ -50,16 +52,27 @@ const SaveLocationScreen = () => {
       aspect: [16, 9],
       quality: 0.8,
     });
-    console.log(image);
+    // console.log(image);
     setPicture(image.uri);
   };
 
   const handleConfirm = async () => {
     const path = await renamePathAndMove(picture);
-    console.log(path);
-    dispatch(addLocation({ title, picture, id: Date.now() }));
+    // console.log(path);
+    dispatch(
+      addLocation({ title, picture, id: Date.now(), address: params?.address })
+    );
     setTitle("");
     setPicture("");
+    navigation.navigate("SaveLocation");
+  };
+
+  const handleGetLocation = () => {
+    navigation.navigate("GetLocation");
+  };
+
+  const handleSetLocation = () => {
+    navigation.navigate("SetLocation");
   };
 
   return (
@@ -68,10 +81,32 @@ const SaveLocationScreen = () => {
       <TextInput value={title} onChangeText={setTitle} placeholder="Título" />
       {picture ? (
         <Image source={{ uri: picture }} style={styles.image} />
-      ) : null}
-      <Button title="Tomar una foto" onPress={handleTakePicture} />
-      <Button title="Seleccionar de la galería" onPress={handlePickLibrary} />
-      <Button title="Confirmar" onPress={handleConfirm}></Button>
+      ) : (
+        <View style={styles.noPic}>
+          <Text>Sin Imagen</Text>
+        </View>
+      )}
+      <View style={styles.btnsContainer}>
+        <Button title="Tomar una foto" onPress={handleTakePicture} />
+        <Button title="Seleccionar de Galería" onPress={handlePickLibrary} />
+      </View>
+      {params?.address ? (
+        <Text>{params?.address}</Text>
+      ) : (
+        <Text>Debes establecer una dirección</Text>
+      )}
+      <View style={styles.btnsContainer}>
+        <Button title="Obtener Ubicación" onPress={handleGetLocation}></Button>
+        <Button
+          title="Establecer Ubicación"
+          onPress={handleSetLocation}
+        ></Button>
+      </View>
+      <Button
+        title="Confirmar"
+        onPress={handleConfirm}
+        disabled={!params?.address || !picture || !title}
+      ></Button>
     </View>
   );
 };

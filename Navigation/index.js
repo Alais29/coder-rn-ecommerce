@@ -9,7 +9,7 @@ const MainNavigation = () => {
   console.log;
   return (
     <NavigationContainer>
-      {user.userID ? <TabNavigatorLogged /> : <AuthStack />}
+      {!user.userID ? <TabNavigatorLogged /> : <AuthStack />}
     </NavigationContainer>
   );
 };

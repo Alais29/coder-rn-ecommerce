@@ -6,6 +6,8 @@ import LocationsScreen from "../../../screens/Locations";
 import { TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import SaveLocationScreen from "../../../screens/SaveLocation";
+import GetLocationScreen from "../../../screens/GetLocation";
+import SetLocationScreen from "../../../screens/SetLocation";
 
 const Stack = createNativeStackNavigator();
 
@@ -54,6 +56,20 @@ const LocationsStack = () => {
               </TouchableOpacity>
             );
           },
+        }}
+      />
+      <Stack.Screen
+        name="GetLocation"
+        component={GetLocationScreen}
+        options={{
+          title: "Obtener ubicación",
+        }}
+      />
+      <Stack.Screen
+        name="SetLocation"
+        component={SetLocationScreen}
+        options={{
+          title: "Establecer ubicación",
         }}
       />
     </Stack.Navigator>
