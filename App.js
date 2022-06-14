@@ -5,6 +5,15 @@ import { Provider } from "react-redux";
 import { SafeAreaView } from "react-native-safe-area-context";
 import MainNavigation from "./Navigation";
 
+import { init } from './db';
+
+init()
+.then(()=> {console.log('Db initialized');})
+.catch((err)=> {
+  console.log('Error loading db');
+  console.log(err.message);
+})
+
 export default function App() {
   const [loaded] = useFonts({
     Nunito: require("./assets/fonts/Nunito/Nunito-Regular.ttf"),

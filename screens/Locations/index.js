@@ -1,18 +1,25 @@
-import { FlatList, StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { FlatList, View } from "react-native";
+import React, { useEffect } from "react";
 import PlaceItem from "../../components/PlaceItem";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getLocations } from "../../features/locations";
 
 const LocationsScreen = () => {
   const { locations } = useSelector((state) => state.locations);
 
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (locations.length === 0) {
+      dispatch(getLocations())
+    }
+  }, [])
+
   const renderItem = ({ item }) => {
     return (
       <PlaceItem
-        onSelect={() => {}}
-        title={item.title}
-        image={item.picture}
-        address={item.address}
+        onSelect={() => { }}
+        item={item}
       />
     );
   };

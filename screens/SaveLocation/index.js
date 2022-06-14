@@ -3,7 +3,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import * as ImagePicker from "expo-image-picker";
 import renamePathAndMove from "../../utils/renamePath";
-import { addLocation } from "../../features/locations";
+import { addLocation, addLocationDb } from "../../features/locations";
 
 import { styles } from "./styles";
 
@@ -59,10 +59,12 @@ const SaveLocationScreen = ({ navigation, route }) => {
   const handleConfirm = async () => {
     const path = await renamePathAndMove(picture);
     // console.log(path);
+    let id = Date.now()
     dispatch(
-      addLocation({ title, picture, id: Date.now(), address: params?.address })
+      addLocation({ title, picture, id, address: params?.address })
     );
-    setTitle("");
+    dispatch(addLocationDb({title, picture, id, address:params?.address}))
+    setTitle(""); 
     setPicture("");
     navigation.navigate("SaveLocation");
   };
